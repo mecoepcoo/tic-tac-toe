@@ -1,16 +1,20 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import './index.less';
 
 type SquareProps = {
-  value: number;
-}
+  inputValue: number;
+};
 
 const Square: React.FC<SquareProps> = (props: SquareProps) => {
-  let { value } = props;
+  let { inputValue } = props;
+  const [value, setCount] = useState<'X' | 'O' | null>(null);
 
   return (
-    <button className="square" onClick={function() { alert('click'); }}>
+    <button
+      className="square"
+      onClick={() => {setCount('X')}}
+    >
       {value}
     </button>
   );
@@ -18,7 +22,7 @@ const Square: React.FC<SquareProps> = (props: SquareProps) => {
 
 const Board: React.FC = () => {
   function renderSquare(i: number) {
-    return <Square value={i} />;
+    return <Square inputValue={i} />;
   };
 
   const status = 'Next player: X';
