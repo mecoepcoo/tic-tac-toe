@@ -2,30 +2,43 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import './index.less';
 
+type squareFlag = 'X' | 'O' | null;
+
 type SquareProps = {
-  inputValue: number;
+  inputValue: squareFlag;
+  onClick: ((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void);
 };
 
 const Square: React.FC<SquareProps> = (props: SquareProps) => {
   let { inputValue } = props;
-  const [value, setCount] = useState<'X' | 'O' | null>(null);
+  // const [value, setValue] = useState<squareFlag>(null);
 
   return (
     <button
       className="square"
-      onClick={() => {setCount('X')}}
+      onClick={props.onClick}
     >
-      {value}
+      {inputValue}
     </button>
   );
 }
 
 const Board: React.FC = () => {
+  const [squares, setSquares] = useState<Array<squareFlag>>(Array(9).fill(null));
+  const [xIsNext, setXIsNext] = useState(true);
+
+  function handleClick(i: number) {
+    let newSquares = squares.slice();
+    newSquares[i] = xIsNext ? 'X' : 'O';
+    setSquares(newSquares);
+    setXIsNext(!xIsNext);
+  }
+
   function renderSquare(i: number) {
-    return <Square inputValue={i} />;
+    return <Square inputValue={squares[i]} onClick={() => handleClick(i)} />;
   };
 
-  const status = 'Next player: X';
+  const status = 'Next player: ' + (xIsNext ? 'X' : 'O');
 
   return (
     <div>
