@@ -29,9 +29,9 @@ type BoardProps = {
 };
 
 const Board: React.FC<BoardProps> = (props: BoardProps) => {
-  const [squares, setSquares] = useState<squareFlag[]>(Array(9).fill(null));
+  // const [squares, setSquares] = useState<squareFlag[]>(Array(9).fill(null));
   const { inputSquares } = props;
-  const [xIsNext, setXIsNext] = useState(true);
+  // const [xIsNext, setXIsNext] = useState(true);
 
   function renderSquare(i: number) {
     return <Square inputValue={inputSquares[i]} onClick={() => props.onClick(i)} />;
