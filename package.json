@@ -134,5 +134,15 @@
     "presets": [
       "react-app"
     ]
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^8.0.0",
+    "commitlint": "^8.0.0",
+    "husky": "^2.4.0"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
   }
 }
